@@ -15,8 +15,8 @@ export default {
   mounted () {
 
     let config = {
-      width : 700,
-      height : 700,
+      width : 360,
+      height : 560,
       padding : 10,
       projection : d3.geoMercator(),
       duration : 3000,
@@ -868,12 +868,32 @@ export default {
       var geojson = geo2rect.compute(data);
       g2r.config = config;
       g2r.data = geojson;
-      g2r.svg = svg.append('g');
+      g2r.svg = svg.append('g').attr('class', "boxs");
+      
       g2r.draw();
+      let box = d3.selectAll('path')
+         box
+         .attr('class', "box")
+         .attr('fill', "blue")
+         .attr('stroke', "white")
+         .attr('stroke-width', '2px')
+
+
       setTimeout(function(){
          g2r.toggle();
          g2r.draw();
+         let box = d3.selectAll('path')
+         box
+         .attr('class', "box")
+         .attr('fill', "green")
+         .attr('stroke', "white")
+         .attr('stroke-width', '2px')
+         console.log(box)
       }, 3000)
+
+      setTimeout(function(){
+         g2r.toggle();
+      }, 4000)
 
       console.log(g2r.mode);
     });
@@ -884,5 +904,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-
+.boxs {
+  border: solid 1px red;
+  .box {
+    transform: scale(0.5);
+  }
+}
 </style>
